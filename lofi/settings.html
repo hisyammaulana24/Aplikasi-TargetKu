@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="mobile-screen">
+        <header class="form-header">
+            <a href="index.html" class="back-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            </a>
+            <h1>Pengaturan</h1>
+            <!-- Placeholder untuk menyeimbangkan header -->
+            <span style="width: 24px;"></span>
+        </header>
+        <main class="settings-page">
+            <div class="settings-section">
+                <h3>Akun</h3>
+                <div class="settings-item">
+                    <span>Status Akun</span>
+                    <strong class="status-free">Gratis</strong>
+                </div>
+                <!-- Tombol ini hanya akan muncul jika pengguna masih gratis -->
+                <a href="premium-offer.html" class="upgrade-link">
+                    <span>👑 Upgrade ke Premium</span>
+                </a>
+            </div>
+
+            <div class="settings-section">
+                <h3>Tampilan (Fitur Premium)</h3>
+                <div class="settings-item disabled">
+                    <label for="dark-mode">Mode Gelap</label>
+                    <div class="toggle-switch">
+                        <div class="toggle-knob"></div>
+                    </div>
+                </div>
+                <div class="settings-item disabled">
+                    <label>Tema Warna</label>
+                    <span>Default</span>
+                </div>
+                <small class="premium-notice">Upgrade untuk membuka kunci fitur ini.</small>
+            </div>
+            
+            <div class="settings-section">
+                <h3>Lainnya</h3>
+                 <div class="settings-item">
+                    <span>Beri Rating Aplikasi</span>
+                    <span>→</span>
+                </div>
+                 <div class="settings-item">
+                    <span>Laporkan Bug</span>
+                    <span>→</span>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
