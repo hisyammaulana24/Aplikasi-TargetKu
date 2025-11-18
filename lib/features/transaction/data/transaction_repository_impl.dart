@@ -1,7 +1,7 @@
-import 'package:drift/drift.dart'; // <-- 1. TAMBAHKAN IMPORT INI
+import 'package:drift/drift.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../../core/app_database.dart' as db; // <-- 2. TAMBAHKAN 'as db'
+import '../../../core/app_database.dart' as db;
 import '../../../core/error/failures.dart';
 import '../domain/transaction_entity.dart';
 import '../domain/transaction_repository.dart';
@@ -33,13 +33,12 @@ class TransactionRepositoryImpl implements TransactionRepository {
   Future<Either<Failure, void>> saveTransaction(Transaction transaction) async {
     try {
       await _database.into(_database.transactions).insert(
-            db.TransactionsCompanion.insert(
-              targetId: transaction.targetId,
-              amount: transaction.amount,
-              type: transaction.type,
-              // Panggil Value secara LANGSUNG tanpa prefix 'db.'
-              description: Value(transaction.description), // <-- PERBAIKI DI SINI
-              date: transaction.date,
+            db.TransactionsCompanion( 
+              targetId: Value(transaction.targetId),
+              amount: Value(transaction.amount),
+              type: Value(transaction.type),
+              description: Value(transaction.description), // Sekarang ini valid
+              date: Value(transaction.date),
             ),
           );
       return const Right(null);

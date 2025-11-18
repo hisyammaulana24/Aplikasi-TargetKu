@@ -20,17 +20,17 @@ class TargetListScreen extends ConsumerWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           centerTitle: true,
-          bottom: TabBar(
+          bottom: const TabBar(
             indicatorColor: Colors.teal,
             labelColor: Colors.teal,
             unselectedLabelColor: Colors.grey,
-            tabs: const [
+            tabs: [
               Tab(text: 'Dalam Proses'),
               Tab(text: 'Selesai'),
             ],
           ),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             // Konten untuk tab "Dalam Proses"
             TargetListView(status: TargetStatus.inProgress),
@@ -40,7 +40,6 @@ class TargetListScreen extends ConsumerWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // TODO: Tambahkan navigasi ke halaman 'Buat Target Baru'
           },
           backgroundColor: Colors.teal,
           child: const Icon(Icons.add, color: Colors.white),
@@ -82,7 +81,6 @@ class TargetListView extends ConsumerWidget {
           itemCount: targets.length,
           itemBuilder: (context, index) {
             final target = targets[index];
-            // TODO: Ganti dengan TargetCardWidget yang lebih bagus
             return Card(
               margin: const EdgeInsets.only(bottom: 12.0),
               child: ListTile(

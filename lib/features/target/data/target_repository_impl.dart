@@ -1,8 +1,8 @@
-import 'package:drift/drift.dart'; // <-- 1. TAMBAHKAN IMPORT INI
+import 'package:drift/drift.dart';
 import 'package:fpdart/fpdart.dart';
 
 // Beri nama panggilan 'db' untuk menghindari konflik nama
-import '../../../core/app_database.dart' as db; // <-- 2. TAMBAHKAN 'as db'
+import '../../../core/app_database.dart' as db;
 import '../../../core/error/failures.dart';
 import '../domain/target_entity.dart';
 import '../domain/target_enum.dart';
@@ -10,7 +10,7 @@ import '../domain/target_repository.dart';
 
 class TargetRepositoryImpl implements TargetRepository {
   // Gunakan tipe data dengan prefix 'db'
-  final db.AppDatabase _database; 
+  final db.AppDatabase _database;
 
   TargetRepositoryImpl(this._database);
 
@@ -39,18 +39,22 @@ class TargetRepositoryImpl implements TargetRepository {
   Future<Either<Failure, void>> saveTarget(Target target) async {
     try {
       await _database.into(_database.targets).insertOnConflictUpdate(
-            db.TargetsCompanion.insert(
-              // Panggil Value secara LANGSUNG tanpa prefix 'db.'
-              id: target.id == null ? const Value.absent() : Value(target.id!), // <-- PERBAIKI DI SINI
-              name: target.name,
-              targetAmount: target.targetAmount,
-              imageUrl: Value(target.imageUrl), // <-- PERBAIKI DI SINI
-              plannedAmount: target.plannedAmount,
-              planFrequency: target.planFrequency,
-              status: target.status,
-              createdAt: target.createdAt,
-              completedAt: Value(target.completedAt), // <-- PERBAIKI DI SINI
+            // --- INI ADALAH PERBAIKANNYA ---
+            // Gunakan konstruktor default () dan bungkus SEMUA nilai dengan Value()
+            db.TargetsCompanion(
+              id: target.id == null
+                  ? const Value.absent()
+                  : Value(target.id!),
+              name: Value(target.name),
+              targetAmount: Value(target.targetAmount),
+              imageUrl: Value(target.imageUrl),
+              plannedAmount: Value(target.plannedAmount),
+              planFrequency: Value(target.planFrequency),
+              status: Value(target.status),
+              createdAt: Value(target.createdAt),
+              completedAt: Value(target.completedAt),
             ),
+            // --- AKHIR PERBAIKAN ---
           );
       return const Right(null);
     } catch (e) {

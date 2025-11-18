@@ -1,18 +1,13 @@
-// lib/core/app_database.dart
-
-import 'dart:io';
 import 'package:drift/drift.dart';
-import 'package:drift/native.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as p;
-
-// Import enum yang sudah kita buat
 import 'package:aplikasi_targetku/features/target/domain/target_enum.dart';
 import 'package:aplikasi_targetku/features/transaction/domain/transaction_enum.dart';
 
+import 'connection/stub.dart'
+    if (dart.library.io) 'connection/native.dart'
+    if (dart.library.html) 'connection/web.dart';
+
 part 'app_database.g.dart'; // Akan di-generate oleh build_runner
 
-// 1. Definisikan Tabel 'Targets'
 class Targets extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
@@ -25,7 +20,6 @@ class Targets extends Table {
   DateTimeColumn get completedAt => dateTime().nullable()();
 }
 
-// 2. Definisikan Tabel 'Transactions'
 class Transactions extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get targetId => integer().references(Targets, #id)();
@@ -35,26 +29,15 @@ class Transactions extends Table {
   DateTimeColumn get date => dateTime()();
 }
 
-// 3. Definisikan Database itu sendiri
 @DriftDatabase(tables: [Targets, Transactions])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+  // --- UBAH KONSTRUKTOR INI ---
+  AppDatabase() : super(openConnection()); // <-- Panggil fungsi dari import kondisional
 
   @override
   int get schemaVersion => 1;
 }
 
-// Fungsi untuk membuka koneksi database
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
-    return NativeDatabase(file);
-  });
-}
-
-// 4. Buat Type Converter untuk Enum
-// Ini agar Drift bisa menyimpan Enum sebagai teks di database
 class TargetStatusConverter extends TypeConverter<TargetStatus, String> {
   const TargetStatusConverter();
   @override

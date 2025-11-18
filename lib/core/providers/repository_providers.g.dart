@@ -19,6 +19,7 @@ final appDatabaseProvider = Provider<db.AppDatabase>.internal(
   allTransitiveDependencies: null,
 );
 
+// ignore: deprecated_member_use
 typedef AppDatabaseRef = ProviderRef<db.AppDatabase>;
 String _$targetRepositoryHash() => r'dbc03080d066a3b3d6b795b475a07d9514eb1071';
 
@@ -34,6 +35,7 @@ final targetRepositoryProvider = AutoDisposeProvider<TargetRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+// ignore: deprecated_member_use
 typedef TargetRepositoryRef = AutoDisposeProviderRef<TargetRepository>;
 String _$transactionRepositoryHash() =>
     r'60a451d830fd9d4745a0f30cba22089fe7146027';
@@ -52,6 +54,7 @@ final transactionRepositoryProvider =
 );
 
 typedef TransactionRepositoryRef
+    // ignore: deprecated_member_use
     = AutoDisposeProviderRef<TransactionRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

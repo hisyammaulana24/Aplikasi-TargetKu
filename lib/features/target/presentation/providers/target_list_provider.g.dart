@@ -157,6 +157,7 @@ class TargetListProvider
   }
 }
 
+// ignore: deprecated_member_use
 mixin TargetListRef on AutoDisposeStreamNotifierProviderRef<List<Target>> {
   /// The parameter `status` of this provider.
   TargetStatus get status;
