@@ -12,7 +12,7 @@ class Target with _$Target {
     int? id,
     required String name,
     required double targetAmount,
-    String? imageUrl,
+    String? imagePath,
     required double plannedAmount,
     required PlanFrequency planFrequency,
     @Default(TargetStatus.inProgress) TargetStatus status,

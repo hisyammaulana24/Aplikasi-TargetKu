@@ -28,11 +28,11 @@ class $TargetsTable extends Targets with TableInfo<$TargetsTable, Target> {
   late final GeneratedColumn<double> targetAmount = GeneratedColumn<double>(
       'target_amount', aliasedName, false,
       type: DriftSqlType.double, requiredDuringInsert: true);
-  static const VerificationMeta _imageUrlMeta =
-      const VerificationMeta('imageUrl');
+  static const VerificationMeta _imagePathMeta =
+      const VerificationMeta('imagePath');
   @override
-  late final GeneratedColumn<String> imageUrl = GeneratedColumn<String>(
-      'image_url', aliasedName, true,
+  late final GeneratedColumn<String> imagePath = GeneratedColumn<String>(
+      'image_path', aliasedName, true,
       type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _plannedAmountMeta =
       const VerificationMeta('plannedAmount');
@@ -71,7 +71,7 @@ class $TargetsTable extends Targets with TableInfo<$TargetsTable, Target> {
         id,
         name,
         targetAmount,
-        imageUrl,
+        imagePath,
         plannedAmount,
         planFrequency,
         status,
@@ -105,9 +105,9 @@ class $TargetsTable extends Targets with TableInfo<$TargetsTable, Target> {
     } else if (isInserting) {
       context.missing(_targetAmountMeta);
     }
-    if (data.containsKey('image_url')) {
-      context.handle(_imageUrlMeta,
-          imageUrl.isAcceptableOrUnknown(data['image_url']!, _imageUrlMeta));
+    if (data.containsKey('image_path')) {
+      context.handle(_imagePathMeta,
+          imagePath.isAcceptableOrUnknown(data['image_path']!, _imagePathMeta));
     }
     if (data.containsKey('planned_amount')) {
       context.handle(
@@ -146,8 +146,8 @@ class $TargetsTable extends Targets with TableInfo<$TargetsTable, Target> {
           .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       targetAmount: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}target_amount'])!,
-      imageUrl: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}image_url']),
+      imagePath: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}image_path']),
       plannedAmount: attachedDatabase.typeMapping
           .read(DriftSqlType.double, data['${effectivePrefix}planned_amount'])!,
       planFrequency: $TargetsTable.$converterplanFrequency.fromSql(
@@ -178,7 +178,7 @@ class Target extends DataClass implements Insertable<Target> {
   final int id;
   final String name;
   final double targetAmount;
-  final String? imageUrl;
+  final String? imagePath;
   final double plannedAmount;
   final PlanFrequency planFrequency;
   final TargetStatus status;
@@ -188,7 +188,7 @@ class Target extends DataClass implements Insertable<Target> {
       {required this.id,
       required this.name,
       required this.targetAmount,
-      this.imageUrl,
+      this.imagePath,
       required this.plannedAmount,
       required this.planFrequency,
       required this.status,
@@ -200,8 +200,8 @@ class Target extends DataClass implements Insertable<Target> {
     map['id'] = Variable<int>(id);
     map['name'] = Variable<String>(name);
     map['target_amount'] = Variable<double>(targetAmount);
-    if (!nullToAbsent || imageUrl != null) {
-      map['image_url'] = Variable<String>(imageUrl);
+    if (!nullToAbsent || imagePath != null) {
+      map['image_path'] = Variable<String>(imagePath);
     }
     map['planned_amount'] = Variable<double>(plannedAmount);
     {
@@ -224,9 +224,9 @@ class Target extends DataClass implements Insertable<Target> {
       id: Value(id),
       name: Value(name),
       targetAmount: Value(targetAmount),
-      imageUrl: imageUrl == null && nullToAbsent
+      imagePath: imagePath == null && nullToAbsent
           ? const Value.absent()
-          : Value(imageUrl),
+          : Value(imagePath),
       plannedAmount: Value(plannedAmount),
       planFrequency: Value(planFrequency),
       status: Value(status),
@@ -244,7 +244,7 @@ class Target extends DataClass implements Insertable<Target> {
       id: serializer.fromJson<int>(json['id']),
       name: serializer.fromJson<String>(json['name']),
       targetAmount: serializer.fromJson<double>(json['targetAmount']),
-      imageUrl: serializer.fromJson<String?>(json['imageUrl']),
+      imagePath: serializer.fromJson<String?>(json['imagePath']),
       plannedAmount: serializer.fromJson<double>(json['plannedAmount']),
       planFrequency: serializer.fromJson<PlanFrequency>(json['planFrequency']),
       status: serializer.fromJson<TargetStatus>(json['status']),
@@ -259,7 +259,7 @@ class Target extends DataClass implements Insertable<Target> {
       'id': serializer.toJson<int>(id),
       'name': serializer.toJson<String>(name),
       'targetAmount': serializer.toJson<double>(targetAmount),
-      'imageUrl': serializer.toJson<String?>(imageUrl),
+      'imagePath': serializer.toJson<String?>(imagePath),
       'plannedAmount': serializer.toJson<double>(plannedAmount),
       'planFrequency': serializer.toJson<PlanFrequency>(planFrequency),
       'status': serializer.toJson<TargetStatus>(status),
@@ -272,7 +272,7 @@ class Target extends DataClass implements Insertable<Target> {
           {int? id,
           String? name,
           double? targetAmount,
-          Value<String?> imageUrl = const Value.absent(),
+          Value<String?> imagePath = const Value.absent(),
           double? plannedAmount,
           PlanFrequency? planFrequency,
           TargetStatus? status,
@@ -282,7 +282,7 @@ class Target extends DataClass implements Insertable<Target> {
         id: id ?? this.id,
         name: name ?? this.name,
         targetAmount: targetAmount ?? this.targetAmount,
-        imageUrl: imageUrl.present ? imageUrl.value : this.imageUrl,
+        imagePath: imagePath.present ? imagePath.value : this.imagePath,
         plannedAmount: plannedAmount ?? this.plannedAmount,
         planFrequency: planFrequency ?? this.planFrequency,
         status: status ?? this.status,
@@ -295,7 +295,7 @@ class Target extends DataClass implements Insertable<Target> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('targetAmount: $targetAmount, ')
-          ..write('imageUrl: $imageUrl, ')
+          ..write('imagePath: $imagePath, ')
           ..write('plannedAmount: $plannedAmount, ')
           ..write('planFrequency: $planFrequency, ')
           ..write('status: $status, ')
@@ -306,7 +306,7 @@ class Target extends DataClass implements Insertable<Target> {
   }
 
   @override
-  int get hashCode => Object.hash(id, name, targetAmount, imageUrl,
+  int get hashCode => Object.hash(id, name, targetAmount, imagePath,
       plannedAmount, planFrequency, status, createdAt, completedAt);
   @override
   bool operator ==(Object other) =>
@@ -315,7 +315,7 @@ class Target extends DataClass implements Insertable<Target> {
           other.id == this.id &&
           other.name == this.name &&
           other.targetAmount == this.targetAmount &&
-          other.imageUrl == this.imageUrl &&
+          other.imagePath == this.imagePath &&
           other.plannedAmount == this.plannedAmount &&
           other.planFrequency == this.planFrequency &&
           other.status == this.status &&
@@ -327,7 +327,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
   final Value<int> id;
   final Value<String> name;
   final Value<double> targetAmount;
-  final Value<String?> imageUrl;
+  final Value<String?> imagePath;
   final Value<double> plannedAmount;
   final Value<PlanFrequency> planFrequency;
   final Value<TargetStatus> status;
@@ -337,7 +337,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
     this.id = const Value.absent(),
     this.name = const Value.absent(),
     this.targetAmount = const Value.absent(),
-    this.imageUrl = const Value.absent(),
+    this.imagePath = const Value.absent(),
     this.plannedAmount = const Value.absent(),
     this.planFrequency = const Value.absent(),
     this.status = const Value.absent(),
@@ -348,7 +348,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
     this.id = const Value.absent(),
     required String name,
     required double targetAmount,
-    this.imageUrl = const Value.absent(),
+    this.imagePath = const Value.absent(),
     required double plannedAmount,
     required PlanFrequency planFrequency,
     required TargetStatus status,
@@ -364,7 +364,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
     Expression<int>? id,
     Expression<String>? name,
     Expression<double>? targetAmount,
-    Expression<String>? imageUrl,
+    Expression<String>? imagePath,
     Expression<double>? plannedAmount,
     Expression<String>? planFrequency,
     Expression<String>? status,
@@ -375,7 +375,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (targetAmount != null) 'target_amount': targetAmount,
-      if (imageUrl != null) 'image_url': imageUrl,
+      if (imagePath != null) 'image_path': imagePath,
       if (plannedAmount != null) 'planned_amount': plannedAmount,
       if (planFrequency != null) 'plan_frequency': planFrequency,
       if (status != null) 'status': status,
@@ -388,7 +388,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
       {Value<int>? id,
       Value<String>? name,
       Value<double>? targetAmount,
-      Value<String?>? imageUrl,
+      Value<String?>? imagePath,
       Value<double>? plannedAmount,
       Value<PlanFrequency>? planFrequency,
       Value<TargetStatus>? status,
@@ -398,7 +398,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
       id: id ?? this.id,
       name: name ?? this.name,
       targetAmount: targetAmount ?? this.targetAmount,
-      imageUrl: imageUrl ?? this.imageUrl,
+      imagePath: imagePath ?? this.imagePath,
       plannedAmount: plannedAmount ?? this.plannedAmount,
       planFrequency: planFrequency ?? this.planFrequency,
       status: status ?? this.status,
@@ -419,8 +419,8 @@ class TargetsCompanion extends UpdateCompanion<Target> {
     if (targetAmount.present) {
       map['target_amount'] = Variable<double>(targetAmount.value);
     }
-    if (imageUrl.present) {
-      map['image_url'] = Variable<String>(imageUrl.value);
+    if (imagePath.present) {
+      map['image_path'] = Variable<String>(imagePath.value);
     }
     if (plannedAmount.present) {
       map['planned_amount'] = Variable<double>(plannedAmount.value);
@@ -448,7 +448,7 @@ class TargetsCompanion extends UpdateCompanion<Target> {
           ..write('id: $id, ')
           ..write('name: $name, ')
           ..write('targetAmount: $targetAmount, ')
-          ..write('imageUrl: $imageUrl, ')
+          ..write('imagePath: $imagePath, ')
           ..write('plannedAmount: $plannedAmount, ')
           ..write('planFrequency: $planFrequency, ')
           ..write('status: $status, ')

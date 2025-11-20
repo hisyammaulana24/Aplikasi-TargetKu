@@ -12,7 +12,7 @@ class Targets extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();
   RealColumn get targetAmount => real()();
-  TextColumn get imageUrl => text().nullable()();
+  TextColumn get imagePath => text().nullable()();
   RealColumn get plannedAmount => real()();
   TextColumn get planFrequency => text().map(const PlanFrequencyConverter())();
   TextColumn get status => text().map(const TargetStatusConverter())();

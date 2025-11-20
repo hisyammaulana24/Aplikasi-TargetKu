@@ -19,7 +19,7 @@ mixin _$Target {
   int? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get targetAmount => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
+  String? get imagePath => throw _privateConstructorUsedError;
   double get plannedAmount => throw _privateConstructorUsedError;
   PlanFrequency get planFrequency => throw _privateConstructorUsedError;
   TargetStatus get status => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $TargetCopyWith<$Res> {
       {int? id,
       String name,
       double targetAmount,
-      String? imageUrl,
+      String? imagePath,
       double plannedAmount,
       PlanFrequency planFrequency,
       TargetStatus status,
@@ -63,7 +63,7 @@ class _$TargetCopyWithImpl<$Res, $Val extends Target>
     Object? id = freezed,
     Object? name = null,
     Object? targetAmount = null,
-    Object? imageUrl = freezed,
+    Object? imagePath = freezed,
     Object? plannedAmount = null,
     Object? planFrequency = null,
     Object? status = null,
@@ -83,9 +83,9 @@ class _$TargetCopyWithImpl<$Res, $Val extends Target>
           ? _value.targetAmount
           : targetAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
       plannedAmount: null == plannedAmount
           ? _value.plannedAmount
@@ -122,7 +122,7 @@ abstract class _$$TargetImplCopyWith<$Res> implements $TargetCopyWith<$Res> {
       {int? id,
       String name,
       double targetAmount,
-      String? imageUrl,
+      String? imagePath,
       double plannedAmount,
       PlanFrequency planFrequency,
       TargetStatus status,
@@ -144,7 +144,7 @@ class __$$TargetImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = null,
     Object? targetAmount = null,
-    Object? imageUrl = freezed,
+    Object? imagePath = freezed,
     Object? plannedAmount = null,
     Object? planFrequency = null,
     Object? status = null,
@@ -164,9 +164,9 @@ class __$$TargetImplCopyWithImpl<$Res>
           ? _value.targetAmount
           : targetAmount // ignore: cast_nullable_to_non_nullable
               as double,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
               as String?,
       plannedAmount: null == plannedAmount
           ? _value.plannedAmount
@@ -199,7 +199,7 @@ class _$TargetImpl implements _Target {
       {this.id,
       required this.name,
       required this.targetAmount,
-      this.imageUrl,
+      this.imagePath,
       required this.plannedAmount,
       required this.planFrequency,
       this.status = TargetStatus.inProgress,
@@ -213,7 +213,7 @@ class _$TargetImpl implements _Target {
   @override
   final double targetAmount;
   @override
-  final String? imageUrl;
+  final String? imagePath;
   @override
   final double plannedAmount;
   @override
@@ -228,7 +228,7 @@ class _$TargetImpl implements _Target {
 
   @override
   String toString() {
-    return 'Target(id: $id, name: $name, targetAmount: $targetAmount, imageUrl: $imageUrl, plannedAmount: $plannedAmount, planFrequency: $planFrequency, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
+    return 'Target(id: $id, name: $name, targetAmount: $targetAmount, imagePath: $imagePath, plannedAmount: $plannedAmount, planFrequency: $planFrequency, status: $status, createdAt: $createdAt, completedAt: $completedAt)';
   }
 
   @override
@@ -240,8 +240,8 @@ class _$TargetImpl implements _Target {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.targetAmount, targetAmount) ||
                 other.targetAmount == targetAmount) &&
-            (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl) &&
+            (identical(other.imagePath, imagePath) ||
+                other.imagePath == imagePath) &&
             (identical(other.plannedAmount, plannedAmount) ||
                 other.plannedAmount == plannedAmount) &&
             (identical(other.planFrequency, planFrequency) ||
@@ -254,8 +254,8 @@ class _$TargetImpl implements _Target {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, targetAmount, imageUrl,
-      plannedAmount, planFrequency, status, createdAt, completedAt);
+  int get hashCode => Object.hash(runtimeType, id, name, targetAmount,
+      imagePath, plannedAmount, planFrequency, status, createdAt, completedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -269,7 +269,7 @@ abstract class _Target implements Target {
       {final int? id,
       required final String name,
       required final double targetAmount,
-      final String? imageUrl,
+      final String? imagePath,
       required final double plannedAmount,
       required final PlanFrequency planFrequency,
       final TargetStatus status,
@@ -283,7 +283,7 @@ abstract class _Target implements Target {
   @override
   double get targetAmount;
   @override
-  String? get imageUrl;
+  String? get imagePath;
   @override
   double get plannedAmount;
   @override

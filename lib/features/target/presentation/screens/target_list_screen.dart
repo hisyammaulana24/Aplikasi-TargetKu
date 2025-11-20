@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/target_enum.dart';
 import '../providers/target_list_provider.dart';
 import 'target_form_screen.dart'; // <-- PENTING: Import file form yang baru dibuat
+import 'target_detail_screen.dart';
 
 class TargetListScreen extends ConsumerWidget {
   const TargetListScreen({super.key});
@@ -15,16 +18,23 @@ class TargetListScreen extends ConsumerWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'TargetKu',
+            'Selamat Datang!',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          centerTitle: true,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.account_circle),
+              onPressed: () {
+                // TODO: Implement profile screen navigation
+              },
+            ),
+          ],
           bottom: const TabBar(
             indicatorColor: Colors.teal,
             labelColor: Colors.teal,
             unselectedLabelColor: Colors.grey,
             tabs: [
-              Tab(text: 'Dalam Proses'),
+              Tab(text: 'In Progress'),
               Tab(text: 'Selesai'),
             ],
           ),
@@ -68,10 +78,21 @@ class TargetListView extends ConsumerWidget {
       data: (targets) {
         if (targets.isEmpty) {
           return Center(
-            child: Text(
-              'Belum ada target di sini.\nAyo buat target pertamamu!',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey[600]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.question_mark_sharp,
+                  size: 100,
+                  color: Colors.grey[300],
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                  'Belum ada target.\nBuat target impianmu sekang!',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 18, color: Colors.grey),
+                ),
+              ],
             ),
           );
         }
@@ -81,11 +102,28 @@ class TargetListView extends ConsumerWidget {
           itemCount: targets.length,
           itemBuilder: (context, index) {
             final target = targets[index];
-            return Card(
-              margin: const EdgeInsets.only(bottom: 12.0),
-              child: ListTile(
-                title: Text(target.name),
-                subtitle: Text('Rp ${target.targetAmount.toStringAsFixed(0)}'),
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TargetDetailScreen(target: target),
+                  ),
+                );
+              },
+              child: Card(
+                margin: const EdgeInsets.only(bottom: 12.0),
+                child: ListTile(
+                  leading: target.imagePath != null && target.imagePath!.isNotEmpty
+                      ? CircleAvatar(
+                          backgroundImage: FileImage(File(target.imagePath!)),
+                        )
+                      : const CircleAvatar(
+                          child: Icon(Icons.savings),
+                        ),
+                  title: Text(target.name),
+                  subtitle: Text('Rp ${target.targetAmount.toStringAsFixed(0)}'),
+                ),
               ),
             );
           },

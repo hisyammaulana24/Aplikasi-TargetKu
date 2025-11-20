@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'features/target/presentation/screens/target_list_screen.dart'; // Kita akan buat file ini
+import 'features/onboarding/presentation/screens/onboarding_screen.dart';
 
 void main() {
   runApp(
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Poppins', // Contoh jika Anda ingin menggunakan font custom
       ),
-      home: const TargetListScreen(), // Halaman utama kita
+      home: const OnboardingScreen(), // Halaman utama kita
     );
   }
 }
